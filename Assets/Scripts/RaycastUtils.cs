@@ -1,8 +1,5 @@
 using UnityEngine;
 
-/// <summary>
-/// Вспомогательный класс, содержащий метод, позволяющий получить выбранный объект
-/// </summary>
 public static class RaycastUtils
 {
     public static T GetSelectedObject<T>() where T : MonoBehaviour
