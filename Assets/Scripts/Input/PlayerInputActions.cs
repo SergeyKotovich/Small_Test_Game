@@ -49,7 +49,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""name"": ""Fire"",
                     ""type"": ""Button"",
                     ""id"": ""4ea1b5fb-7d5f-4872-80a0-d6ddc9a8722a"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false

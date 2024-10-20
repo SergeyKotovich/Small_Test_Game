@@ -6,10 +6,12 @@ using VContainer.Unity;
 public class GameLifeTimeScope : LifetimeScope
 {
     [SerializeField] private PlayerController _playerController;
+    [SerializeField] private GameTimer _gameTimer;
     
     protected override void Configure(IContainerBuilder builder)
     {
         builder.RegisterInstance(_playerController);
+        builder.RegisterInstance(_gameTimer).AsSelf().AsImplementedInterfaces();
         
         RegisterMessagePipe(builder);
     }
@@ -20,5 +22,6 @@ public class GameLifeTimeScope : LifetimeScope
         builder.RegisterBuildCallback(c => GlobalMessagePipe.SetProvider(c.AsServiceProvider()));
         
         builder.RegisterMessageBroker<TimerStarted>(options);
+        builder.RegisterMessageBroker<TimerStopped>(options);
     }
 }
