@@ -34934,8 +34934,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _audioSource: {fileID: 1502511078}
-  _backgroundMusic: {fileID: 8300000, guid: 19d42711bfd9da845870795c52e57d83, type: 3}
-  _doorSound: {fileID: 0}
+  _jumpSound: {fileID: 8300000, guid: 8bbe0b3d40ba41c4c84c93d68090d3c9, type: 3}
+  _doorSound: {fileID: 8300000, guid: 4f98736bdae12f245819455a610d0165, type: 3}
+  _buttonPressed: {fileID: 8300000, guid: 474837d77887ab841ac6e796cb89503e, type: 3}
 --- !u!4 &1502511080
 Transform:
   m_ObjectHideFlags: 0
