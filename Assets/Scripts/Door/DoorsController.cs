@@ -13,13 +13,15 @@ public class DoorsController : MonoBehaviour
 
     private readonly float _startValue = -1.2f;
     private readonly float _endValue = -5f;
-    private readonly float _duration = 0.5f;
+    private readonly float _duration = 1f;
 
     private IDisposable _subscriptions;
+    private SoundsManager _soundsManager;
 
     [Inject]
-    public void Construct(ISubscriber<TimerStarted> timerStartedSubscriber)
+    public void Construct(ISubscriber<TimerStarted> timerStartedSubscriber, SoundsManager soundsManager)
     {
+        _soundsManager = soundsManager;
         _subscriptions = timerStartedSubscriber.Subscribe(_ => OpenDoors().Forget());
     }
 
@@ -27,7 +29,13 @@ public class DoorsController : MonoBehaviour
     {
         _firstDoor.DOLocalMoveY(_endValue, _duration);
         _secondDoor.DOLocalMoveY(_endValue, _duration);
+        
+      //  _soundsManager.PlaySoundDoor();
+        
         await UniTask.Delay(_delay);
+        
+       // _soundsManager.PlaySoundDoor();
+        
         _firstDoor.DOLocalMoveY(_startValue, _duration);
         _secondDoor.DOLocalMoveY(_startValue, _duration);
     }

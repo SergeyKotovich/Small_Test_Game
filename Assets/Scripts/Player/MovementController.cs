@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,7 +14,7 @@ public class MovementController : MonoBehaviour
 
     private CharacterController _characterController;
     private PlayerInputActions _playerInputActions;
-    
+
     public void Initialize(PlayerInputActions playerInputActions)
     {
         _playerInputActions = playerInputActions;
@@ -46,7 +47,7 @@ public class MovementController : MonoBehaviour
         {
             _verticalVelocity += _gravity * Time.deltaTime;
         }
-        else if (_verticalVelocity < 0) 
+        else if (_verticalVelocity < 0)
         {
             _verticalVelocity = 0;
         }
@@ -61,21 +62,23 @@ public class MovementController : MonoBehaviour
 
         if (_isSprinting)
         {
-            _characterController.Move((direction * _speed * _boost + new Vector3(0,_verticalVelocity)) * Time.deltaTime);
+            _characterController.Move(
+                (direction * _speed * _boost + new Vector3(0, _verticalVelocity)) * Time.deltaTime);
         }
         else
         {
-            _characterController.Move((direction * _speed + new Vector3(0,_verticalVelocity)) * Time.deltaTime);
+            _characterController.Move((direction * _speed + new Vector3(0, _verticalVelocity)) * Time.deltaTime);
         }
     }
 
     private void OnJump(InputAction.CallbackContext callbackContext)
     {
-        if (_characterController.isGrounded) 
+        if (_characterController.isGrounded)
         {
             _verticalVelocity = _power;
         }
     }
+
 
     private void OnDisable()
     {

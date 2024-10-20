@@ -7,11 +7,13 @@ public class GameLifeTimeScope : LifetimeScope
 {
     [SerializeField] private PlayerController _playerController;
     [SerializeField] private GameTimer _gameTimer;
+    [SerializeField] private SoundsManager _soundsManager;
     
     protected override void Configure(IContainerBuilder builder)
     {
         builder.RegisterInstance(_playerController);
         builder.RegisterInstance(_gameTimer).AsSelf().AsImplementedInterfaces();
+        builder.RegisterInstance(_soundsManager);
         
         RegisterMessagePipe(builder);
     }
