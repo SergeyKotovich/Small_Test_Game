@@ -11,12 +11,12 @@ public class PlayerController : MonoBehaviour
     private PlayerInputActions _playerInputActions;
 
     [Inject]
-    public void Construct()
+    public void Construct(SoundsManager soundsManager)
     {
         _playerInputActions = new PlayerInputActions();
-        _movementController.Initialize(_playerInputActions);
+        _movementController.Initialize(_playerInputActions, soundsManager);
         _rotationController.Initialize(_playerInputActions);
-        _buttonHandler.Initialize(_playerInputActions);
+        _buttonHandler.Initialize(_playerInputActions, soundsManager);
     }
 
     private void OnEnable()

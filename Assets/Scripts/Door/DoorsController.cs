@@ -30,11 +30,11 @@ public class DoorsController : MonoBehaviour
         _firstDoor.DOLocalMoveY(_endValue, _duration);
         _secondDoor.DOLocalMoveY(_endValue, _duration);
         
-      //  _soundsManager.PlaySoundDoor();
+        _soundsManager.PlaySoundDoor();
         
         await UniTask.Delay(_delay);
         
-       // _soundsManager.PlaySoundDoor();
+        _soundsManager.PlaySoundDoor();
         
         _firstDoor.DOLocalMoveY(_startValue, _duration);
         _secondDoor.DOLocalMoveY(_startValue, _duration);

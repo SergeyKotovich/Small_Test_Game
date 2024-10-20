@@ -14,9 +14,11 @@ public class MovementController : MonoBehaviour
 
     private CharacterController _characterController;
     private PlayerInputActions _playerInputActions;
+    private SoundsManager _soundsManager;
 
-    public void Initialize(PlayerInputActions playerInputActions)
+    public void Initialize(PlayerInputActions playerInputActions, SoundsManager soundsManager)
     {
+        _soundsManager = soundsManager;
         _playerInputActions = playerInputActions;
         _characterController = GetComponent<CharacterController>();
 
@@ -76,6 +78,7 @@ public class MovementController : MonoBehaviour
         if (_characterController.isGrounded)
         {
             _verticalVelocity = _power;
+            _soundsManager.PlaySoundJump();
         }
     }
 

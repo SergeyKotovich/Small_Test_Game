@@ -1,43 +1,24 @@
-using System;
-using MessagePipe;
 using UnityEngine;
-using VContainer;
 
 public class SoundsManager : MonoBehaviour
 {
     [SerializeField] private AudioSource _audioSource;
-    [SerializeField] private AudioClip _backgroundMusic;
+    [SerializeField] private AudioClip _jumpSound;
     [SerializeField] private AudioClip _doorSound;
-
-    private IDisposable _subscriptions;
-
-    [Inject]
-    public void Construct(ISubscriber<TimerStarted> timerStartedSubscriber,
-        ISubscriber<TimerStopped> timerStoppedSubscriber)
-    {
-        _subscriptions = DisposableBag.Create(timerStartedSubscriber.Subscribe(_ => EnableBackgroundMusic()),
-            timerStoppedSubscriber.Subscribe(_ => DisableBackgroundMusic()));
-    }
-
+    [SerializeField] private AudioClip _buttonPressed;
+    
     public void PlaySoundDoor()
     {
-        _audioSource.clip = _doorSound;
-        _audioSource.Play();
+        _audioSource.PlayOneShot(_doorSound); 
+    }
+    
+    public void PlaySoundJump()
+    {
+        _audioSource.PlayOneShot(_jumpSound); 
     }
 
-    private void EnableBackgroundMusic()
+    public void PlayButtonPressedSound()
     {
-        _audioSource.clip = _backgroundMusic;
-        _audioSource.Play();
-    }
-
-    private void DisableBackgroundMusic()
-    {
-        _audioSource.clip = null;
-    }
-
-    private void OnDestroy()
-    {
-        _subscriptions.Dispose();
+        _audioSource.PlayOneShot(_buttonPressed); 
     }
 }
