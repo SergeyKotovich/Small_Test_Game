@@ -12,7 +12,7 @@ public abstract class GameButton : MonoBehaviour
         _startPosition = transform.position;
     }
 
-    public virtual void OnClick()
+    public virtual void AnimationButton()
     {
         transform.DOLocalMoveX(_endValue, _duration).OnComplete(() => transform.DOMove(_startPosition, _duration));
     }

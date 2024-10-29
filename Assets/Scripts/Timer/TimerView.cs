@@ -1,19 +1,17 @@
 using TMPro;
 using UnityEngine;
-using VContainer;
 
 public class TimerView : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _timerText;
-    private ITimeObserver _timer;
+    [SerializeField] private GameTimer _timer;
 
-    [Inject]
-    public void Construct(ITimeObserver timer)
+
+    public void Awake()
     {
-        _timer = timer;
         _timer.TimeChanged += UpdateTime;
     }
-    
+
     private void UpdateTime(float time)
     {
         _timerText.text = time.ToString("F");

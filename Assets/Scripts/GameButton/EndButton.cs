@@ -1,19 +1,19 @@
-using MessagePipe;
-using VContainer;
+using UnityEngine;
+using UnityEngine.Events;
 
 public class EndButton : GameButton
 {
-    private IPublisher<TimerStopped> _timerStoppedPublisher;
+    [SerializeField] private GameTimer _gameTimer;
+    [SerializeField] private UnityEvent _endButtonPressed;
 
-    [Inject]
-    public void Construct(IPublisher<TimerStopped> timerStoppedPublisher)
+    
+    public override void AnimationButton()
     {
-        _timerStoppedPublisher = timerStoppedPublisher;
-    }
-
-    public override void OnClick()
-    {
-        base.OnClick();
-        _timerStoppedPublisher.Publish(new TimerStopped());
+        if (_gameTimer.IsRunning)
+        {
+            base.AnimationButton();
+            _gameTimer.StopTimer();
+            _endButtonPressed?.Invoke();
+        }
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,17 +7,16 @@ public class MovementController : MonoBehaviour
     [SerializeField] private float _boost = 2f;
     [SerializeField] private float _power = 10;
     [SerializeField] private float _gravity = -9.81f;
+    [SerializeField] private AudioSource _audioSource;
 
     private float _verticalVelocity;
     private bool _isSprinting;
 
     private CharacterController _characterController;
     private PlayerInputActions _playerInputActions;
-    private SoundsManager _soundsManager;
 
-    public void Initialize(PlayerInputActions playerInputActions, SoundsManager soundsManager)
+    public void Initialize(PlayerInputActions playerInputActions)
     {
-        _soundsManager = soundsManager;
         _playerInputActions = playerInputActions;
         _characterController = GetComponent<CharacterController>();
 
@@ -61,6 +59,7 @@ public class MovementController : MonoBehaviour
 
         var direction = new Vector3(inputValue.x, 0, inputValue.y);
         direction = transform.TransformDirection(direction);
+        direction.y = 0;
 
         if (_isSprinting)
         {
@@ -78,7 +77,7 @@ public class MovementController : MonoBehaviour
         if (_characterController.isGrounded)
         {
             _verticalVelocity = _power;
-            _soundsManager.PlaySoundJump();
+            _audioSource.Play();
         }
     }
 

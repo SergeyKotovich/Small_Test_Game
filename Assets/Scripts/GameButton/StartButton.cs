@@ -1,19 +1,19 @@
-using MessagePipe;
-using VContainer;
+using UnityEngine;
+using UnityEngine.Events;
 
 public class StartButton : GameButton
 {
-    private IPublisher<TimerStarted> _timerStartedPublisher;
-
-    [Inject]
-    public void Construct(IPublisher<TimerStarted> timerStartedPublisher)
+    [SerializeField] private GameTimer _gameTimer;
+    [SerializeField] private UnityEvent _startButtonPressed;
+    
+    public override void AnimationButton()
     {
-        _timerStartedPublisher = timerStartedPublisher;
-    }
-
-    public override void OnClick()
-    {
-        base.OnClick();
-        _timerStartedPublisher.Publish(new TimerStarted());
+        if (_gameTimer.IsRunning)
+        {
+            return;
+        }
+        base.AnimationButton();
+        _gameTimer.StartTimer();
+        _startButtonPressed?.Invoke();
     }
 }

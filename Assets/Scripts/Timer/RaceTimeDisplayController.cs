@@ -1,18 +1,15 @@
-using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using VContainer;
 
 public class RaceTimeDisplayController : MonoBehaviour
 {
     [SerializeField] private List<TextMeshProUGUI> _results;
-    private ITimerStoppable _timer;
+    [SerializeField] private GameTimer _timer;
 
-    [Inject]
-    public void Construct(ITimerStoppable timer)
+
+    public void Awake()
     {
-        _timer = timer;
         _timer.TimerStopped += UpdateResult;
     }
 
